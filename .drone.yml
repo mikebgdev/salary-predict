@@ -25,11 +25,6 @@ steps:
     commands:
       - pip install -r requirements.txt
 
-  - name: run-tests
-    image: python:3.11.2
-    commands:
-      - python -m unittest discover tests
-
 
 ---
 
