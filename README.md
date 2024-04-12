@@ -1,4 +1,4 @@
-# AI Project to predict aalary
+# AI Project to predict salary
 [![Build Status](https://drone.mikebgdev.com/api/badges/mikebgdev/salary-predict/status.svg)](https://drone.mikebgdev.com/mikebgdev/salary-predict)
 
 ## Description
