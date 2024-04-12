@@ -1,0 +1,73 @@
+name: python-project-build
+kind: pipeline
+type: docker
+
+trigger:
+    event:
+        - push
+        - pull_request
+
+platform:
+    os: linux
+    arch: amd64
+
+clone:
+    disable: true
+
+steps:
+  - name: clone
+    image: plugins/git
+    settings:
+      depth: 50
+
+  - name: install-dependencies
+    image: python:3.11.2
+    commands:
+      - pip install -r requirements.txt
+
+  - name: run-tests
+    image: python:3.11.2
+    commands:
+      - python -m unittest discover tests
+
+
+---
+
+name: python-project-promote
+kind: pipeline
+type: docker
+
+trigger:
+    event:
+        - promote
+
+steps:
+
+    - name: scp_files
+      image: appleboy/drone-scp
+      settings:
+          host:
+              from_secret: docker_host
+          username:
+              from_secret: username_ssh
+          password:
+              from_secret: password_ssh
+          port: 22
+          target: /var/www/${DRONE_REPO_NAME}-${DRONE_DEPLOY_TO}
+          source: .
+
+    - name: production
+      image: appleboy/drone-ssh
+      when:
+          target:
+              - production
+      settings:
+          host:
+              from_secret: docker_host
+          username:
+              from_secret: username_ssh
+          password:
+              from_secret: password_ssh
+          script:
+              - cd /var/www/${DRONE_REPO_NAME}-${DRONE_DEPLOY_TO}
+              - docker-compose up -d --build

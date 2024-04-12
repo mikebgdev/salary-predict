@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Salary Predict</title>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <script src=" https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js "></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </head>
+  <body>
+    <div id="file-url" data-url="{{ url_for('static', filename='model/model.json') }}"></div>
+    <h1>Introduce tus datos para predecir tu sueldo</h1>
+    <form>
+      <div class="inputs">
+        <div class="inputGroup">
+          <label for="job">Puesto de trabajo:</label>
+          <select id="job" name="job" placeholder="Selecciona tu puesto de trabajo">
+            {% for job in joblist %}
+              <option value="{{ job['label'] }}">{{ job['name'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="inputGroup">
+          <label for="education">Estudios:</label>
+          <select id="education" name="education" placeholder="Estudios">
+            {% for level in education %}
+              <option value="{{ level['label'] }}">{{ level['name'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="inputGroup">
+          <label for="age">Edad:</label>
+          <input type="number" name="age" id="age" value="">
+        </div>
+
+        <div class="inputGroup">
+          <label for="exp">Años de experiencia:</label>
+          <input type="number" name="exp" id="exp" value="">
+        </div>
+      </div>
+      <button type="submit" id="processForm">Predecir</button>
+    </form>
+    <div><h1 id="result"></h1></div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+html {
+  background: rgb(255,255,255);
+  background: linear-gradient(56deg, rgba(255,255,255,1) 0%, rgba(136,255,253,1) 27%, rgba(222,0,255,1) 100%); 
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  background: none;
+  border-bottom: 2px solid #3498db;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #e74c3c;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+.selectize-input.full {
+  background-color: transparent;
+}
+
+.selectize-input {
+  border: none;
+  border-bottom: 2px solid #3498db;
+}
