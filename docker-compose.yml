@@ -2,9 +2,9 @@ version: "3"
 
 services:
   web:
-    container_name: ai-salary-predict
+    container_name: python-${PROJECT_NAME}
     ports:
-      - "5000:5000"
+      - ${HTTP_PORT}:5000
     build:
       context: .
       dockerfile: Dockerfile
